@@ -1,4 +1,3 @@
-node-asana-api
-==============
+# node-asana-api
 
 A node.js client implementation for Asana API.

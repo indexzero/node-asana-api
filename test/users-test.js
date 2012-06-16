@@ -6,17 +6,39 @@
  */
  
 var vows = require('vows'),
-    asana = require('../lib/asana-api');
+    assert = require('./assert'),
+    helpers = require('./helpers');
+    
+var config = helpers.loadConfig();
 
 vows.describe('asana-api/users').addBatch({
   "When using an instance of asana.Client": {
-    topic: asana.createClient(require('./config.json')),
-    "the me() method": {
+    topic: helpers.createClient(),
+    "the users.me() method": {
       topic: function (client) {
-        client.me(this.callback);
+        client.users.me(this.callback);
       },
-      "should respond with the current user": function (_, user) {
-        console.dir(user);
+      "should respond with a valid user": function (err, user) {
+        assert.isNull(err);
+        assert.isUser(user);
+      }
+    },
+    "the users.list() method": {
+      topic: function (client) {
+        client.users.list(this.callback);
+      },
+      "should respond with a list of users": function (err, users) {
+        assert.isNull(err);
+        assert.isArray(users);
+      }
+    },
+    "the users.get() method": {
+      topic: function (client) {
+        client.users.get(config.users[0], this.callback);
+      },
+      "should respond with a valid user": function (err, user) {
+        assert.isNull(err);
+        assert.isUser(user);
       }
     }
   }
