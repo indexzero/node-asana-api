@@ -40,6 +40,17 @@ vows.describe('asana-api/users').addBatch({
         assert.isNull(err);
         assert.isUser(user);
       }
+    },
+    "the users.tasks() method": {
+      topic: function (client) {
+        client.users.tasks(config.users[0], this.callback);
+      },
+      "should respond with a list of tasks": function (err, tasks) {
+        assert.isNull(err);
+        assert.isArray(tasks);
+        assert.hasNameAndId(tasks);
+      }
+      
     }
   }
 }).export(module);
