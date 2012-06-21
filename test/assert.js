@@ -30,8 +30,8 @@ assert.isTask = function (task) {
   assert.isString(task.notes);
   assert.isBoolean(task.completed);
   assert.isString(task.assignee_status);
-  assert.isString(task.due_on);
   assert.isArray(task.projects);
   assert.isObject(task.workspace);
   assert.isArray(task.followers);
+  !task.due_on || assert.isString(task.due_on)
 };
