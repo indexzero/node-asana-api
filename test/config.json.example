@@ -1,3 +1,7 @@
 {
-  "apiKey": "YOUR-SECRET-API-KEYZ"
+  "apiKey": "YOUR-SECRET-API-KEYZ",
+  "workspaces": [],
+  "users": ["me"],
+  "tasks": [],
+  "projects": []
 }

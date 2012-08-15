@@ -4,11 +4,11 @@
  * (C) 2012 Charlie Robbins
  *
  */
- 
+
 var vows = require('vows'),
     assert = require('./assert'),
     helpers = require('./helpers');
-    
+
 var config = helpers.loadConfig();
 
 vows.describe('asana-api/projects').addBatch({
@@ -26,7 +26,10 @@ vows.describe('asana-api/projects').addBatch({
     },
     "the projects.tasks() method": {
       topic: function (client) {
-        client.projects.tasks(config.projects[0], this.callback);
+        if (config.projects && config.projects[0])
+          client.projects.tasks(config.projects[0], this.callback);
+        else
+          this.callback("no projects configured in config.json");
       },
       "should respond with valid tasks": function (err, tasks) {
         assert.isNull(err);
