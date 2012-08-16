@@ -25,6 +25,18 @@ vows.describe('asana-api/tasks').addBatch({
         assert.isNull(err);
         assert.isTask(task);
       }
+    },
+    "the tasks.create() method": {
+      topic: function(client) {
+        client.tasks.create(config.workspaces[0], config.projects[0], {
+          name: 'testing name',
+          notes: 'testing notes'
+        }, this.callback);
+      },
+      "should respond with a valid task": function(err, task) {
+        assert.isNull(err);
+        assert.isTask(task);
+      }
     }
   }
 }).export(module);
