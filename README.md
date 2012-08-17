@@ -31,6 +31,7 @@ A node.js client implementation for Asana API.
   GET /workspaces
   GET /workspaces/:workspace-id/tasks
   
+  POST /tasks
   GET /tasks
   GET /tasks/:task-id
 
@@ -41,7 +42,6 @@ A node.js client implementation for Asana API.
 ### Not Implemented
 
 ``` scala
-  POST /tasks
   PUT  /tasks/:task-id
   GET  /tasks/:task-id/stories
   POST /tasks/:task-id/stories
