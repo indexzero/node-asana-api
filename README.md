@@ -1,3 +1,4 @@
+[![build status](https://secure.travis-ci.org/indexzero/node-asana-api.png)](http://travis-ci.org/indexzero/node-asana-api)
 # node-asana-api
 
 A node.js client implementation for Asana API.
