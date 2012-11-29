@@ -1,5 +1,5 @@
 /*
- * users-test.js: Tests for the user resources of the Asana API.
+ * tasks-test.js: Tests for the task resources of the Asana API.
  *
  * (C) 2012 Charlie Robbins
  *
