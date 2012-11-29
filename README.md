@@ -2,15 +2,15 @@
 
 A node.js client implementation for Asana API.
 
-## Usage 
+## Usage
 
 ``` js
   var asana = require('asana-api');
-  
+
   var client = asana.createClient({
     apiKey: 'your-secret-api-key'
   });
-  
+
   client.users.list(function (err, users) {
     //
     // List all users for this Asana account.
@@ -27,15 +27,22 @@ A node.js client implementation for Asana API.
   GET /users
   GET /users/me
   GET /users/:user-id
-  
+
   GET /workspaces
   GET /workspaces/:workspace-id/tasks
-  
+
+  POST /tasks
   GET /tasks
   GET /tasks/:task-id
 
   GET /projects
-  GET /projects/:project-id/tasks  
+  GET /projects/:project-id/tasks
+
+  POST /tags
+  GET /tags
+  GET /tags/:tag-id
+  PUT /tags/:tag-id
+  GET /tags/:tag-id/tasks
 ```
 
 ### Not Implemented
@@ -48,10 +55,10 @@ A node.js client implementation for Asana API.
   GET  /tasks/:task-id/projects
   POST /tasks/:task-id/addProject
   POST /tasks/:task-id/removeProject
-  
+
   GET /projects/:project-id
   PUT /projects/:project-id
-  
+
   GET /stories/:story-id
 
   PUT  /workspaces/:workspace-id
