@@ -15,7 +15,7 @@ assert.hasNameAndId = function (obj) {
       assert.hasNameAndId(item);
     });
   }
-  
+
   assert.isObject(obj);
   assert.include(obj, 'id');
   assert.include(obj, 'name');
@@ -34,4 +34,13 @@ assert.isTask = function (task) {
   assert.isObject(task.workspace);
   assert.isArray(task.followers);
   !task.due_on || assert.isString(task.due_on)
+};
+
+assert.isTag = function (tag) {
+  assert.isNumber(tag.id);
+  assert.isString(tag.name);
+  assert.isString(tag.notes);
+  assert.isString(tag.created_at);
+  assert.isArray(tag.followers);
+  assert.isObject(tag.workspace);
 };
