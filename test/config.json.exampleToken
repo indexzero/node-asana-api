@@ -1,7 +1,0 @@
-{
-  "token": "YOUR-ASANA-CONNECT-OAUTH-TOKEN",
-  "workspaces": [],
-  "users": ["me"],
-  "tasks": [],
-  "projects": []
-}
