@@ -1,5 +1,6 @@
 {
   "apiKey": "YOUR-SECRET-API-KEYZ",
+  "token": "OPTIONAL-ASANA-CONNECT-OAUTH-TOKEN",
   "workspaces": [],
   "users": ["me"],
   "tasks": [],
