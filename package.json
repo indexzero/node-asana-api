@@ -10,11 +10,11 @@
   "keywords": ["asana", "api", "project management"],
   "dependencies": {
     "errs": "0.2.x",
-    "request": "2.9.x",
-    "utile": "0.0.x"
+    "request": "2.21.x",
+    "utile": "0.2.x"
   },
   "devDependencies": {
-    "vows": "0.6.x"
+    "vows": "0.7.x"
   },
   "main": "./lib/asana-api",
   "scripts": { "test": "vows test/*-test.js --spec" },
