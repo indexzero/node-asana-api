@@ -2,8 +2,22 @@
 var asana = require('../lib/asana-api');
 
 exports.createClient = function () {
+  return exports.createClientFromToken() || exports.createClientFromAPIKey();
+};
+
+exports.createClientFromAPIKey = function () {
+  var config = exports.loadConfig();
+  if (!config.apiKey) return null;
   return asana.createClient({
-    apiKey: exports.loadConfig().apiKey
+    apiKey: config.apiKey
+  });
+};
+
+exports.createClientFromToken = function () {
+  var config = exports.loadConfig();
+  if (!config.token) return null;
+  return asana.createClient({
+    token: config.token
   });
 };
 

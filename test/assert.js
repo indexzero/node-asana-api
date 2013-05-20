@@ -1,6 +1,12 @@
 
 var assert = module.exports = require('assert');
 
+assert.isClient = function (client) {
+  assert.isObject(client);
+  !client.apiKey || assert.match(client.auth, /^Basic .+$/);
+  !client.token || assert.match(client.auth, /^Bearer .+$/);
+}
+
 assert.isUser = function (user) {
   assert.isObject(user);
   assert.include(user, 'id');

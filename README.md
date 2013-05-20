@@ -19,6 +19,23 @@ A node.js client implementation for Asana API.
   });
 ```
 
+## Alternatively create the client with an OAuth token
+
+``` js
+  var asana = require('asana-api');
+  
+  var client = asana.createClient({
+    token: 'your-oauth-token'
+  });
+  
+  client.users.list(function (err, users) {
+    //
+    // List all users for this Asana account.
+    //
+    console.dir(users);
+  });
+```
+
 ## API Coverage
 
 ### Implemented
