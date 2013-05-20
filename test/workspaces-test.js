@@ -1,14 +1,14 @@
 /*
- * users-test.js: Tests for the user resources of the Asana API.
+ * workspaces-test.js: Tests for the workspace resources of the Asana API.
  *
  * (C) 2012 Charlie Robbins
  *
  */
- 
+
 var vows = require('vows'),
     assert = require('./assert'),
     helpers = require('./helpers');
-    
+
 var config = helpers.loadConfig();
 
 vows.describe('asana-api/workspaces').addBatch({
