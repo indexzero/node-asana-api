@@ -1,13 +1,17 @@
 {
   "name": "asana-api",
   "description": "A nodejs client implementation for Asana API",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "author": "Charlie Robbins <charlie.robbins@gmail.com>",
   "repository": {
     "type": "git",
-    "url": "http://github.com/indexzero/node-asana-api.git" 
+    "url": "http://github.com/indexzero/node-asana-api.git"
   },
-  "keywords": ["asana", "api", "project management"],
+  "keywords": [
+    "asana",
+    "api",
+    "project management"
+  ],
   "dependencies": {
     "errs": "0.2.x",
     "request": "2.21.x",
@@ -17,6 +21,10 @@
     "vows": "0.7.x"
   },
   "main": "./lib/asana-api",
-  "scripts": { "test": "vows test/*-test.js --spec" },
-  "engines": { "node": ">= 0.6.0" }
+  "scripts": {
+    "test": "vows test/*-test.js --spec"
+  },
+  "engines": {
+    "node": ">= 0.6.0"
+  }
 }
