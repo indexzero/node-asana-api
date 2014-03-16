@@ -2,7 +2,7 @@
 var asana = require('../lib/asana-api');
 
 exports.createClient = function () {
-  return exports.createClientFromToken() || exports.createClientFromAPIKey();
+  return exports.createClientFromOAuthRefresh() || exports.createClientFromToken() || exports.createClientFromAPIKey();
 };
 
 exports.createClientFromAPIKey = function () {
@@ -15,9 +15,33 @@ exports.createClientFromAPIKey = function () {
 
 exports.createClientFromToken = function () {
   var config = exports.loadConfig();
-  if (!config.token) return null;
+  if (!config.oauth) return null;
   return asana.createClient({
-    token: config.token
+    token: config.oauth.accessToken
+  });
+};
+
+exports.createClientFromOAuthAccessToken = function () {
+  var config = exports.loadConfig();
+  if (!config.oauth) return null;
+  return asana.createClient({
+    oauth: {
+      accessToken: config.oauth.accessToken
+    }
+  });
+};
+
+exports.createClientFromOAuthRefresh = function () {
+  var config = exports.loadConfig();
+  if (!config.oauth) return null;
+  return asana.createClient({
+    oauth: {
+      accessToken : "old-expired-token",
+      refreshToken : config.oauth.refreshToken,
+      clientId : config.oauth.clientId,
+      clientSecret : config.oauth.clientSecret,
+      redirectUrl : config.oauth.redirectUrl
+    }
   });
 };
 

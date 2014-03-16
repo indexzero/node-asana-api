@@ -1,6 +1,12 @@
 {
   "apiKey": "YOUR-SECRET-API-KEYZ",
-  "token": "OPTIONAL-ASANA-CONNECT-OAUTH-TOKEN",
+  "oauth": {
+  	"accessToken" : "ASANA-CONNECT-OAUTH-TOKEN-TRUMPS-APIKEY",
+  	"refreshToken" : "OPTIONAL-AUTO-REFRESH-TOKEN-AND-BELOW",
+  	"clientId" : "",
+  	"clientSecret" : "",
+  	"redirectUrl" : ""
+  },
   "workspaces": [],
   "users": ["me"],
   "tasks": [],

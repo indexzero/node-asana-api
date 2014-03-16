@@ -3,8 +3,8 @@ var assert = module.exports = require('assert');
 
 assert.isClient = function (client) {
   assert.isObject(client);
-  !client.apiKey || assert.match(client.auth, /^Basic .+$/);
-  !client.token || assert.match(client.auth, /^Bearer .+$/);
+  !client.apiKey || assert.match(client.authHeader, /^Basic .+$/);
+  !client.token || assert.match(client.authHeader, /^Bearer .+$/);
 }
 
 assert.isUser = function (user) {
