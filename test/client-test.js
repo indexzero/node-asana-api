@@ -30,12 +30,53 @@ if (config.apiKey) {
   });
 }
 
-if (config.token) {
+if (config.oauth) {
   clientVows.addBatch({
     "When instantiating a new asana.Client": {
       "with a token": {
         topic: function () {
-          var client = helpers.createClientFromToken();
+          var client;
+
+          try {
+            client = helpers.createClientFromToken();
+          } catch(e) {
+            return this.callback(e);
+          }
+
+          this.callback(null, client);
+        },
+        "a valid client should be returned": function (err, client) {
+          assert.isNull(err);
+          assert.isClient(client);
+        }
+      },
+      "with an OAuth accessToken": {
+        topic: function () {
+          var client;
+          
+          try {
+            client = helpers.createClientFromOAuthAccessToken();
+          } catch (e) {
+            return this.callback(e);
+          }
+
+          this.callback(null, client);
+        },
+        "a valid client should be returned": function (err, client) {
+          assert.isNull(err);
+          assert.isClient(client);
+        }
+      },
+      "with an expired accessToken and OAuth refresh" : {
+        topic: function() {
+          var client;
+
+          try {
+            client = helpers.createClientFromOAuthRefresh();
+          } catch(e) {
+            return this.callback(e);
+          }
+
           this.callback(null, client);
         },
         "a valid client should be returned": function (err, client) {
