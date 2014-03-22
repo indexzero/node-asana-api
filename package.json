@@ -1,11 +1,11 @@
 {
-  "name": "asana-api",
-  "description": "A nodejs client implementation for Asana API",
-  "version": "0.2.0",
-  "author": "Charlie Robbins <charlie.robbins@gmail.com>",
+  "name": "asana-api-oauth",
+  "description": "A nodejs client implementation for Asana API with OAuth",
+  "version": "0.2.1",
+  "author": "Jaco Swarts <jaco@productive.me>",
   "repository": {
     "type": "git",
-    "url": "http://github.com/indexzero/node-asana-api.git" 
+    "url": "http://github.com/productiveme/node-asana-api.git" 
   },
   "keywords": ["asana", "api", "project management"],
   "dependencies": {

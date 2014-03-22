@@ -128,6 +128,6 @@ A node.js client implementation for Asana API.
   $ npm test
 ```
 
-#### Author: [Charlie Robbins][0]
+#### Credit: [Charlie Robbins][0]
 
 [0]: http://nodejitsu.com
