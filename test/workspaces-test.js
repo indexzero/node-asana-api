@@ -18,7 +18,7 @@ vows.describe('asana-api/workspaces').addBatch({
       topic: function (client) {
         client.workspaces.list(this.callback);
       },
-      "should respond with valid workspaces": function (err, workspaces) {
+      "should respond with valid workspaces": function (err, workspaces) {        
         assert.isNull(err);
         workspaces.forEach(function (workspace) {
           assert.hasNameAndId(workspace);
@@ -35,6 +35,24 @@ vows.describe('asana-api/workspaces').addBatch({
       "should respond with valid tasks": function (err, tasks) {
         assert.isNull(err);
         assert.isArray(tasks);
+      }
+    },
+    "the workspaces.projects() method": {
+      topic: function (client) {
+        client.workspaces.projects(config.workspaces[0], this.callback);
+      },
+      "should respond with the projects in this workspace": function (err, projects) {
+        assert.isNull(err);
+        assert.isArray(projects);
+      }
+    },
+    "the workspaces.teams() method": {
+      topic: function (client) {
+        client.workspaces.teams(config.workspaces[0], this.callback);
+      },
+      "should respond with the team records that match the given workspace": function (err, teams) {
+        assert.isNull(err);
+        assert.isArray(teams);
       }
     }
   }

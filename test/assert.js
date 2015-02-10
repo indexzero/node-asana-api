@@ -50,3 +50,14 @@ assert.isTag = function (tag) {
   assert.isArray(tag.followers);
   assert.isObject(tag.workspace);
 };
+
+assert.isComment = function (comment) {
+  assert.isString(comment.created_at);
+  assert.isObject(comment.created_by);
+  assert.isNumber(comment.id);
+  assert.isString(comment.source);
+  assert.isObject(comment.target);
+  assert.isString(comment.text);
+  assert.isString(comment.type);
+
+};
