@@ -33,9 +33,36 @@ vows.describe('asana-api/tasks').addBatch({
           notes: 'testing notes'
         }, this.callback);
       },
-      "should respond with a valid task": function(err, task) {
+      "should respond with a valid task": function (err, task) {
         assert.isNull(err);
         assert.isTask(task);
+      }
+    },
+    "the tasks.remove() method": {
+      topic: function(client) {
+        client.tasks.remove(config.tasks[0], this.callback)
+      },
+      "should respond with empty task object": function (err, result) {
+        assert.isNull(err);
+        assert.deepEqual(result, {});
+      }
+    },
+    "the tasks.stories() method": {
+      topic: function(client) {
+        client.tasks.stories(config.tasks[0], this.callback)
+      },
+      "should respond with stories from the task": function (err, stories) {
+        assert.isNull(err);
+        assert.isArray(stories);
+      }
+    },
+    "the tasks.comment() method": {
+      topic: function(client) {
+        client.tasks.comment(config.tasks[0], "A new comment", this.callback)
+      },
+      "should respond with the comment data": function (err, comment) {
+        assert.isNull(err);
+        assert.isComment(comment);
       }
     }
   }
