@@ -13,18 +13,18 @@
     "project management"
   ],
   "dependencies": {
-    "errs": "0.2.x",
-    "request": "2.21.x",
-    "utile": "0.2.x"
+    "async": "^1.4.0",
+    "errs": "~0.3.2",
+    "request": "^2.60.0"
   },
   "devDependencies": {
-    "vows": "0.8.x"
+    "vows": "0.8.0"
   },
   "main": "./lib/asana-api",
   "scripts": {
     "test": "vows test/*-test.js --spec"
   },
   "engines": {
-    "node": ">= 0.6.0"
+    "node": ">= 0.8.0"
   }
 }
