@@ -25,11 +25,11 @@ A node.js client implementation for Asana API.
 
 ``` js
   var asana = require('asana-api');
-  
+
   var client = asana.createClient({
     token: 'your-oauth-token'
   });
-  
+
   client.users.list(function (err, users) {
     //
     // List all users for this Asana account.
@@ -42,7 +42,7 @@ A node.js client implementation for Asana API.
 
 ``` js
   var asana = require('asana-api');
-  
+
   var client = asana.createClient({
     oauth: {
       "accessToken" : "your-oauth-token",
@@ -52,7 +52,7 @@ A node.js client implementation for Asana API.
       "redirectUrl" : "your-redirect-url-to-store-new-token"
     }
   });
-  
+
   client.users.list(function (err, users) {
     //
     // List all users for this Asana account.
