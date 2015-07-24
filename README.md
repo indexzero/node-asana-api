@@ -1,6 +1,6 @@
-# node-asana-api
+# asana-api
 
-A node.js client implementation for Asana API.
+A Node.js client implementation for Asana API.
 
 ## Usage
 
@@ -45,11 +45,11 @@ A node.js client implementation for Asana API.
 
   var client = asana.createClient({
     oauth: {
-      "accessToken" : "your-oauth-token",
-      "refreshToken" : "your-oauth-refresh-token",
-      "clientId" : "your-client-id",
-      "clientSecret" : "your-client-secret",
-      "redirectUrl" : "your-redirect-url-to-store-new-token"
+      accessToken : "your-oauth-token",
+      refreshToken : "your-oauth-refresh-token",
+      clientId : "your-client-id",
+      clientSecret : "your-client-secret",
+      redirectUrl : "your-redirect-url-to-store-new-token"
     }
   });
 
@@ -61,42 +61,44 @@ A node.js client implementation for Asana API.
   });
 ```
 
-
-
 ## API Coverage
 
 ### Implemented
 
 ``` scala
-  GET /users
-  GET /users/me
-  GET /users/:user-id
+  GET  /users
+  GET  /users
+  GET  /users/me
+  GET  /users/:user-id
 
-  GET /workspaces
-  GET /workspaces/:workspace-id/tasks
+  GET  /workspaces
+  GET  /workspaces/:workspace-id/tasks
+  GET  /workspaces/:workspace-id/projects
+  GET  /organizations/:workspace-id/teams
 
   POST /tasks
-  GET /tasks
-  GET /tasks/:task-id
+  GET  /tasks
+  PUT  /tasks/:task-id
+  GET  /tasks/:task-id
+  DELETE /tasks/:task-id
+  GET  /tasks/:task-id/stories
+  POST /tasks/:task-id/stories
+  POST /tasks/:task-id/addProject
 
-  GET /projects
-  GET /projects/:project-id/tasks
+  GET  /projects
+  GET  /projects/:project-id/tasks
 
   POST /tags
-  GET /tags
-  GET /tags/:tag-id
-  PUT /tags/:tag-id
-  GET /tags/:tag-id/tasks
+  GET  /tags
+  GET  /tags/:tag-id
+  PUT  /tags/:tag-id
+  GET  /tags/:tag-id/tasks
 ```
 
 ### Not Implemented
 
 ``` scala
-  PUT  /tasks/:task-id
-  GET  /tasks/:task-id/stories
-  POST /tasks/:task-id/stories
   GET  /tasks/:task-id/projects
-  POST /tasks/:task-id/addProject
   POST /tasks/:task-id/removeProject
 
   GET /projects/:project-id
@@ -106,20 +108,7 @@ A node.js client implementation for Asana API.
 
   PUT  /workspaces/:workspace-id
   POST /workspaces/:workspace-id/tasks
-  GET  /workspaces/:workspace-id/projects
   GET  /workspaces/:workspace-id/users
-```
-
-## Installation
-
-### Installing npm (node package manager)
-```
-  curl http://npmjs.org/install.sh | sh
-```
-
-### Installing node-asana-api
-```
-  [sudo] npm install asana-api
 ```
 
 ## Run Tests
@@ -128,6 +117,7 @@ A node.js client implementation for Asana API.
   $ npm test
 ```
 
-#### Author: [Charlie Robbins][0]
+#### AUTHOR: [Charlie Robbins][0]
+#### LICENSE: MIT
 
-[0]: http://nodejitsu.com
+[0]: http://sudomakethought.com
