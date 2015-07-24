@@ -10,46 +10,58 @@ var vows = require('vows'),
     helpers = require('./helpers');
 
 var config = helpers.loadConfig();
+var context = {};
 
 vows.describe('asana-api/tasks').addBatch({
   "When using an instance of asana.Client": {
     topic: helpers.createClient(),
+    "the tasks.create() method": {
+      "without a projectId": {
+        topic: function(client) {
+          client.tasks.create(config.workspaces[0], null, {
+            name: 'testing name',
+            notes: 'testing notes'
+          }, this.callback);
+        },
+        "should respond with a valid task": function (err, task) {
+          assert.isNull(err);
+          assert.isTask(task);
+        }
+      },
+      "with a projectId": {
+        topic: function(client) {
+          client.tasks.create(config.workspaces[0], config.projects[0], {
+            name: 'testing name',
+            notes: 'testing notes'
+          }, this.callback);
+        },
+        "should respond with a valid task": function (err, task) {
+          assert.isNull(err);
+          assert.isTask(task);
+          context.task = task;
+        }
+      }
+    }
+  }
+}).addBatch({
+  "When using an instance of asana.Client": {
+    topic: helpers.createClient(),
     "the tasks.get() method": {
       topic: function (client) {
-        if (config.tasks && config.tasks[0])
-          client.tasks.get(config.tasks[0], this.callback);
-        else
-          this.callback("no task configured on config.json");
+        client.tasks.get(context.task.id, this.callback);
       },
       "should respond with a valid task": function (err, task) {
         assert.isNull(err);
         assert.isTask(task);
       }
     },
-    "the tasks.create() method": {
-      topic: function(client) {
-        client.tasks.create(config.workspaces[0], config.projects[0], {
-          name: 'testing name',
-          notes: 'testing notes'
-        }, this.callback);
-      },
-      "should respond with a valid task": function (err, task) {
-        assert.isNull(err);
-        assert.isTask(task);
-      }
-    },
-    "the tasks.remove() method": {
-      topic: function(client) {
-        client.tasks.remove(config.tasks[0], this.callback)
-      },
-      "should respond with empty task object": function (err, result) {
-        assert.isNull(err);
-        assert.deepEqual(result, {});
-      }
-    },
+  }
+}).addBatch({
+  "When using an instance of asana.Client": {
+    topic: helpers.createClient(),
     "the tasks.stories() method": {
       topic: function(client) {
-        client.tasks.stories(config.tasks[0], this.callback)
+        client.tasks.stories(context.task.id, this.callback);
       },
       "should respond with stories from the task": function (err, stories) {
         assert.isNull(err);
@@ -58,11 +70,24 @@ vows.describe('asana-api/tasks').addBatch({
     },
     "the tasks.comment() method": {
       topic: function(client) {
-        client.tasks.comment(config.tasks[0], "A new comment", this.callback)
+        client.tasks.comment(context.task.id, "A new comment", this.callback);
       },
       "should respond with the comment data": function (err, comment) {
         assert.isNull(err);
         assert.isComment(comment);
+      }
+    }
+  }
+}).addBatch({
+  "When using an instance of asana.Client": {
+    topic: helpers.createClient(),
+    "the tasks.remove() method": {
+      topic: function(client) {
+        client.tasks.remove(context.task.id, this.callback)
+      },
+      "should respond with empty task object": function (err, result) {
+        assert.isNull(err);
+        assert.deepEqual(result, {});
       }
     }
   }

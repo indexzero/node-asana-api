@@ -18,7 +18,7 @@
     "utile": "0.2.x"
   },
   "devDependencies": {
-    "vows": "0.7.x"
+    "vows": "0.8.x"
   },
   "main": "./lib/asana-api",
   "scripts": {

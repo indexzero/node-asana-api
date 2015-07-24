@@ -26,10 +26,11 @@ vows.describe('asana-api/projects').addBatch({
     },
     "the projects.tasks() method": {
       topic: function (client) {
-        if (config.projects && config.projects[0])
-          client.projects.tasks(config.projects[0], this.callback);
-        else
-          this.callback("no projects configured in config.json");
+        if (!config.projects || !config.projects[0]) {
+          return this.callback(new Error('No projects configured in test/config.json'));
+        }
+
+        client.projects.tasks(config.projects[0], this.callback);
       },
       "should respond with valid tasks": function (err, tasks) {
         assert.isNull(err);

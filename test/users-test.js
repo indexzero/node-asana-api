@@ -4,11 +4,11 @@
  * (C) 2012 Charlie Robbins
  *
  */
- 
+
 var vows = require('vows'),
     assert = require('./assert'),
     helpers = require('./helpers');
-    
+
 var config = helpers.loadConfig();
 
 vows.describe('asana-api/users').addBatch({
@@ -41,16 +41,16 @@ vows.describe('asana-api/users').addBatch({
         assert.isUser(user);
       }
     },
-    "the users.tasks() method": {
-      topic: function (client) {
-        client.users.tasks(config.users[0], this.callback);
-      },
-      "should respond with a list of tasks": function (err, tasks) {
-        assert.isNull(err);
-        assert.isArray(tasks);
-        assert.hasNameAndId(tasks);
-      }
-      
-    }
+    // "the users.tasks() method": {
+    //   topic: function (client) {
+    //     client.users.tasks(config.users[0], this.callback);
+    //   },
+    //   "should respond with a list of tasks": function (err, tasks) {
+    //     assert.isNull(err);
+    //     assert.isArray(tasks);
+    //     assert.hasNameAndId(tasks);
+    //   }
+
+    // }
   }
 }).export(module);
