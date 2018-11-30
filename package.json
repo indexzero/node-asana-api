@@ -5,18 +5,26 @@
   "author": "Jaco Swarts <jaco@productive.me>",
   "repository": {
     "type": "git",
-    "url": "http://github.com/productiveme/node-asana-api.git" 
+    "url": "http://github.com/productiveme/node-asana-api.git"
   },
-  "keywords": ["asana", "api", "project management"],
+  "keywords": [
+    "asana",
+    "api",
+    "project management"
+  ],
   "dependencies": {
     "errs": "0.2.x",
-    "request": "2.21.x",
+    "request": "^2.88.0",
     "utile": "0.2.x"
   },
   "devDependencies": {
     "vows": "0.7.x"
   },
   "main": "./lib/asana-api",
-  "scripts": { "test": "vows test/*-test.js --spec" },
-  "engines": { "node": ">= 0.6.0" }
+  "scripts": {
+    "test": "vows test/*-test.js --spec"
+  },
+  "engines": {
+    "node": ">= 0.6.0"
+  }
 }
