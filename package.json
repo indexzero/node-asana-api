@@ -1,7 +1,7 @@
 {
   "name": "asana-api-oauth",
   "description": "A nodejs client implementation for Asana API with OAuth",
-  "version": "0.2.1",
+  "version": "0.2.2",
   "author": "Jaco Swarts <jaco@productive.me>",
   "repository": {
     "type": "git",
