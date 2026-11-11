@@ -29,7 +29,9 @@
   "types": "./dist/asana-api.d.ts",
   "files": [
     "lib",
-    "dist"
+    "dist",
+    "CHANGELOG.md",
+    "MIGRATION.md"
   ],
   "sideEffects": false,
   "scripts": {
