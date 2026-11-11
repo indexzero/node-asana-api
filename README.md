@@ -10,7 +10,7 @@ tags), returns plain promises, and lets you reach anything else with
 
 ## Install
 
-``` bash
+```bash
   $ npm install asana-api
 ```
 
@@ -22,7 +22,7 @@ too.
 Create a client with a [personal access token][pat], or with the access token
 from an OAuth flow.
 
-``` js
+```js
 import { createClient } from 'asana-api'
 
 const client = createClient({
@@ -41,7 +41,7 @@ Every method returns a promise for the `data` of Asana's response.
 The methods that read take an optional query object last. Use it for
 `opt_fields`, and for the `workspace` that Asana wants on most lists.
 
-``` js
+```js
 const users = await client.users.list({ workspace: '1234' })
 const task = await client.tasks.get('5678', { opt_fields: 'name,due_on,assignee.name' })
 ```
@@ -51,7 +51,7 @@ const task = await client.tasks.get('5678', { opt_fields: 'name,due_on,assignee.
 Asana truncates a long list unless you page through it. `client.pages()`
 follows `next_page` for you and yields one item at a time.
 
-``` js
+```js
 for await (const task of client.pages('/projects/1234/tasks')) {
   console.log(task.gid, task.name)
 }
@@ -62,7 +62,7 @@ client.pages({ path: '/tasks', query: { project: '1234', opt_fields: 'name' } })
 
 ### Writing
 
-``` js
+```js
 // Create a task in a workspace. The second argument is a project gid, an
 // array of them, or null.
 const task = await client.tasks.create('workspace-gid', 'project-gid', {
@@ -80,16 +80,16 @@ await client.tasks.remove(task.gid)
 A response that is not a success rejects with an `AsanaError`. It carries the
 HTTP `status` and the parsed body as `result`.
 
-``` js
+```js
 import { AsanaError } from 'asana-api'
 
 try {
   await client.tasks.get('0')
 } catch (err) {
   if (err instanceof AsanaError) {
-    console.log(err.status)                      // 404
-    console.log(err.message)                     // Asana Error (404): Not Found
-    console.log(err.result.errors[0].message)    // what Asana said
+    console.log(err.status) // 404
+    console.log(err.message) // Asana Error (404): Not Found
+    console.log(err.result.errors[0].message) // what Asana said
   }
 }
 ```
@@ -99,7 +99,7 @@ try {
 Give the client enough to refresh an expired access token and it will do so
 once on a 401, then retry the request.
 
-``` js
+```js
 const client = createClient({
   oauth: {
     accessToken: 'your-oauth-token',
@@ -118,7 +118,7 @@ After a refresh, the new token is at `client.oauth.accessToken`.
 `client.request()` sends an authenticated request to any path and unwraps
 `data`, so an endpoint without a method here is still one call away.
 
-``` js
+```js
 const sections = await client.request('/projects/1234/sections')
 
 const story = await client.request({
@@ -133,7 +133,7 @@ const story = await client.request({
 Code written for 1.x keeps working. Every method still takes a callback as
 its last argument, and the package can be loaded with `require()`.
 
-``` js
+```js
 const asana = require('asana-api')
 
 const client = asana.createClient({ token: process.env.ASANA_ACCESS_TOKEN })
@@ -147,17 +147,17 @@ See `MIGRATION.md` for what changed between 1.x and 2.0.
 
 ### Options
 
-| Option | Purpose |
-| --- | --- |
-| `token` | A personal access token or an OAuth access token. |
-| `oauth` | `{ accessToken, refreshToken, clientId, clientSecret, redirectUrl }`. |
-| `url` | Base URL of the API. Defaults to `https://app.asana.com/api/1.0`. |
-| `oauthUrl` | The OAuth token endpoint. Defaults to Asana's. |
-| `fetch` | A `fetch` to use in place of the global one, for a proxy or a test. |
+| Option     | Purpose                                                               |
+| ---------- | --------------------------------------------------------------------- |
+| `token`    | A personal access token or an OAuth access token.                     |
+| `oauth`    | `{ accessToken, refreshToken, clientId, clientSecret, redirectUrl }`. |
+| `url`      | Base URL of the API. Defaults to `https://app.asana.com/api/1.0`.     |
+| `oauthUrl` | The OAuth token endpoint. Defaults to Asana's.                        |
+| `fetch`    | A `fetch` to use in place of the global one, for a proxy or a test.   |
 
 ## API Coverage
 
-``` scala
+```scala
   client.users.list()                 GET    /users
   client.users.me()                   GET    /users/me
   client.users.get(user)              GET    /users/:user
@@ -190,13 +190,13 @@ See `MIGRATION.md` for what changed between 1.x and 2.0.
 
 The programs in `examples/` each take a token from `ASANA_ACCESS_TOKEN`.
 
-``` bash
+```bash
   $ ASANA_ACCESS_TOKEN=... node examples/whoami.js
 ```
 
 ## Run Tests
 
-``` bash
+```bash
   $ pnpm install
   $ pnpm test
   $ pnpm run check
@@ -205,6 +205,7 @@ The programs in `examples/` each take a token from `ASANA_ACCESS_TOKEN`.
 The tests answer requests from a local server. None of them talk to Asana.
 
 #### AUTHOR: [Charlie Robbins][0]
+
 #### LICENSE: MIT
 
 [0]: http://sudomakethought.com
