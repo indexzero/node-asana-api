@@ -20,7 +20,8 @@ const { after, before, beforeEach, describe, it } = require('node:test');
 
 const asana = require('..');
 
-const LEGACY = require('../package.json').version.startsWith('1.');
+// 1.x is CommonJS. Everything after it declares itself an ES module.
+const LEGACY = require('../package.json').type !== 'module';
 const root = path.join(__dirname, '..');
 
 /** Requests the server has seen since the last reset. */
