@@ -35,7 +35,7 @@
   "scripts": {
     "test": "node --test \"test/*.test.js\" \"test/*.test.cjs\"",
     "test:coverage": "node --test --experimental-test-coverage \"test/*.test.js\" \"test/*.test.cjs\"",
-    "lint": "biome check",
+    "lint": "biome ci --error-on-warnings",
     "lint:fix": "biome check --write",
     "build:types": "tsc -p tsconfig.json",
     "check:types": "tsc -p tsconfig.types.json",

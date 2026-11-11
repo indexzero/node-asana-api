@@ -30,7 +30,9 @@ function stub(respond = () => [200, { data: {} }], options = { token: 'tok' }) {
       }
       calls.push(call)
       const [status, payload] = respond(call)
-      return new Response(typeof payload === 'string' ? payload : JSON.stringify(payload), { status })
+      return new Response(typeof payload === 'string' ? payload : JSON.stringify(payload), {
+        status
+      })
     }
   })
   return { client, calls }
@@ -280,9 +282,12 @@ describe('pages', () => {
 
   it('stops at the first error', async () => {
     const { client } = stub(() => [429, { errors: [{ message: 'Rate limited' }] }])
-    await assert.rejects(async () => {
-      for await (const _ of client.pages('/tasks')) assert.fail()
-    }, { status: 429 })
+    await assert.rejects(
+      async () => {
+        for await (const _ of client.pages('/tasks')) assert.fail()
+      },
+      { status: 429 }
+    )
   })
 })
 

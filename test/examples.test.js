@@ -43,7 +43,15 @@ before(async () => {
     } else if (url.pathname === '/users/me') {
       reply = [200, { data: { gid: '1', name: 'Ada Lovelace', email: 'ada@example.com' } }]
     } else if (url.pathname === '/workspaces') {
-      reply = [200, { data: [{ gid: '7', name: 'Engineering' }, { gid: '8', name: 'Design' }] }]
+      reply = [
+        200,
+        {
+          data: [
+            { gid: '7', name: 'Engineering' },
+            { gid: '8', name: 'Design' }
+          ]
+        }
+      ]
     } else if (url.pathname === '/projects/9/tasks') {
       reply = url.searchParams.has('offset')
         ? [200, { data: [{ gid: '3', name: 'third' }], next_page: null }]

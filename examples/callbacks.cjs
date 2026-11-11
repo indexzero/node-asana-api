@@ -11,8 +11,8 @@ const client = asana.createClient({
   url: process.env.ASANA_API_URL
 })
 
-client.workspaces.list(function (err, workspaces) {
+client.workspaces.list((err, workspaces) => {
   if (err) throw err
 
-  console.log('workspaces: ' + workspaces.map(workspace => workspace.name).join(', '))
+  console.log(`workspaces: ${workspaces.map(workspace => workspace.name).join(', ')}`)
 })
