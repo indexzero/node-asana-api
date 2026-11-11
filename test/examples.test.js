@@ -16,7 +16,10 @@ import { promisify } from 'node:util'
 const run = promisify(execFile)
 const root = path.join(import.meta.dirname, '..')
 
-/** What each example must print, and the arguments it takes. */
+/**
+ * What each example must print, and the arguments it takes.
+ * @type {Record<string, { args: string[], output: string }>}
+ */
 const expected = {
   'callbacks.cjs': { args: [], output: 'workspaces: Engineering, Design' },
   'errors.js': { args: [], output: '404: Asana Error (404): Not Found\ntask: Unknown object: 0' },

@@ -48,10 +48,12 @@ describe('exports', () => {
 describe('createClient', () => {
   it('requires a token', () => {
     assert.throws(() => createClient({}), /token/)
+    // @ts-expect-error options are required
     assert.throws(() => createClient(), /token/)
   })
 
   it('refuses an API key and names the replacement', () => {
+    // @ts-expect-error apiKey is no longer an option
     assert.throws(() => createClient({ apiKey: 'k' }), /`token`/)
   })
 
@@ -79,18 +81,31 @@ describe('promises and callbacks', () => {
     assert.deepEqual(await pending, { gid: 'me' })
   })
 
-  it('returns nothing and calls back when a callback is given', async () => {
+  it('calls back when a callback is given, and still returns a promise', async () => {
     const { client } = stub(() => [200, { data: { gid: 'me' } }])
-    const user = await new Promise((resolve, reject) => {
-      const returned = client.users.me((err, result) => (err ? reject(err) : resolve(result)))
-      assert.equal(returned, undefined)
+    /** @type {unknown[]} */
+    let called = []
+    const returned = client.users.me((...args) => {
+      called = args
     })
-    assert.deepEqual(user, { gid: 'me' })
+    assert.deepEqual(await returned, { gid: 'me' })
+    assert.deepEqual(called, [null, { gid: 'me' }])
+  })
+
+  it('does not reject the returned promise when a callback takes the error', async () => {
+    const { client } = stub(() => [500, { errors: [] }])
+    /** @type {any} */
+    let seen
+    const result = await client.users.me(err => {
+      seen = err
+    })
+    assert.equal(result, undefined)
+    assert.equal(seen.status, 500)
   })
 
   it('rejects with an AsanaError carrying the status and the body', async () => {
     const { client } = stub(() => [403, { errors: [{ message: 'Forbidden' }] }])
-    await assert.rejects(client.tasks.get('1'), err => {
+    await assert.rejects(client.tasks.get('1'), (/** @type {any} */ err) => {
       assert.ok(err instanceof AsanaError)
       assert.ok(err instanceof Error)
       assert.equal(err.name, 'AsanaError')
@@ -103,7 +118,7 @@ describe('promises and callbacks', () => {
 
   it('rejects when a success response is not JSON, keeping the parse error', async () => {
     const { client } = stub(() => [200, '<html>'])
-    await assert.rejects(client.users.me(), err => {
+    await assert.rejects(client.users.me(), (/** @type {any} */ err) => {
       assert.equal(err.status, 200)
       assert.equal(err.result, '<html>')
       assert.ok(err.cause instanceof SyntaxError)
@@ -124,7 +139,7 @@ describe('promises and callbacks', () => {
         throw failure
       }
     })
-    await assert.rejects(client.users.me(), err => {
+    await assert.rejects(client.users.me(), (/** @type {any} */ err) => {
       assert.ok(err instanceof AsanaError)
       assert.equal(err.cause, failure)
       assert.equal(err.status, undefined)
@@ -301,7 +316,7 @@ describe('token refresh', () => {
           : [401, {}],
       { oauth: { ...oauth } }
     )
-    await assert.rejects(client.users.me(), err => {
+    await assert.rejects(client.users.me(), (/** @type {any} */ err) => {
       assert.equal(err.message, 'Asana OAuth Refresh Error (400): The refresh token is invalid')
       assert.equal(err.status, 400)
       return true

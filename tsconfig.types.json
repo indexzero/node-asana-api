@@ -1,0 +1,14 @@
+{
+  "//": "Typechecks the tests, the examples and test/types/ against the generated declarations in dist/, resolved by package name through the exports map as a consumer's compiler resolves them. Separate from tsconfig.json because that program emits and this one must not. Run `pnpm run build:types` first.",
+  "compilerOptions": {
+    "allowJs": true,
+    "checkJs": true,
+    "strict": true,
+    "noEmit": true,
+    "module": "nodenext",
+    "target": "es2024",
+    "lib": ["es2024"],
+    "types": ["node"]
+  },
+  "include": ["test/types/**/*", "test/*.test.js", "examples/*.js"]
+}

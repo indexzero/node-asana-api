@@ -1,0 +1,17 @@
+{
+  "//": "Checks the JSDoc in lib/ against the code under it and generates the published declarations into dist/. The JavaScript is the only source of types. Do not add a .d.ts beside a .js: TypeScript would drop the .js from this program and check nothing.",
+  "compilerOptions": {
+    "allowJs": true,
+    "checkJs": true,
+    "strict": true,
+    "declaration": true,
+    "emitDeclarationOnly": true,
+    "rootDir": "lib",
+    "outDir": "dist",
+    "module": "nodenext",
+    "target": "es2024",
+    "lib": ["es2024"],
+    "types": ["node"]
+  },
+  "include": ["lib/**/*.js"]
+}

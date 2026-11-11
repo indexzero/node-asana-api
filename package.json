@@ -33,9 +33,23 @@
   ],
   "sideEffects": false,
   "scripts": {
-    "test": "node --test \"test/*.test.js\" \"test/*.test.cjs\""
+    "test": "node --test \"test/*.test.js\" \"test/*.test.cjs\"",
+    "test:coverage": "node --test --experimental-test-coverage \"test/*.test.js\" \"test/*.test.cjs\"",
+    "lint": "biome check",
+    "lint:fix": "biome check --write",
+    "build:types": "tsc -p tsconfig.json",
+    "check:types": "tsc -p tsconfig.types.json",
+    "check": "pnpm run lint && pnpm run build:types && pnpm run check:types",
+    "prepack": "pnpm run build:types",
+    "prepublishOnly": "pnpm run check && pnpm test"
   },
   "engines": {
     "node": ">=24"
-  }
+  },
+  "devDependencies": {
+    "@biomejs/biome": "2.6.6",
+    "@types/node": "^24.19.2",
+    "typescript": "7.0.2"
+  },
+  "packageManager": "pnpm@10.34.0"
 }
