@@ -5,7 +5,7 @@ All notable changes to this project are documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## [Unreleased]
+## [2.0.0] - Unreleased
 
 See `MIGRATION.md` for how to move from 1.x.
 
@@ -18,6 +18,8 @@ See `MIGRATION.md` for how to move from 1.x.
 - `AsanaError`, with `status`, `result` and `cause`.
 - `url`, `oauthUrl` and `fetch` options on `createClient()`.
 - `tasks.create()` accepts an array of projects.
+- When `tasks.create()` cannot add the new task to a project, the error
+  carries the task as `err.task`.
 - Type declarations, generated from the source.
 - Examples in `examples/`, which run in the test suite.
 
