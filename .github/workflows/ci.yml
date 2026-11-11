@@ -15,7 +15,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        # Every release line that `engines` in package.json admits.
+        # The supported release lines that `engines` in package.json admits.
         node: [24, 26]
 
     steps:

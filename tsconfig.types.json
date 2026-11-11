@@ -1,5 +1,5 @@
 {
-  "//": "Typechecks the tests, the examples and test/types/ against the generated declarations in dist/, resolved by package name through the exports map as a consumer's compiler resolves them. Separate from tsconfig.json because that program emits and this one must not. Run `pnpm run build:types` first.",
+  "//": "Typechecks the tests, the examples and test/types/ against the generated declarations in dist/, resolved by package name through the exports map as a consumer's compiler resolves them. Separate from tsconfig.json because that program emits and this one must not. The `check:types` script builds dist/ first, because without it the `types` condition does not resolve and this program would quietly check lib/ instead.",
   "compilerOptions": {
     "allowJs": true,
     "checkJs": true,
@@ -10,5 +10,5 @@
     "lib": ["es2024"],
     "types": ["node"]
   },
-  "include": ["test/types/**/*", "test/*.test.js", "examples/*.js"]
+  "include": ["test/types/**/*", "test/*.test.js", "examples/*.js", "scripts/*.mjs"]
 }
