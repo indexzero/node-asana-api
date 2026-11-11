@@ -29,8 +29,8 @@ does change.
 Older versions of Node.js are no longer maintained, and the client now relies
 on the built-in `fetch`.
 
-A missed migration is loud: npm warns about the engine at install, and an
-older Node.js fails when it loads the package.
+npm warns about the engine at install. Older versions of Node.js may still
+load the package, but nothing here is tested on them.
 
 ### The package is an ES module
 
@@ -59,6 +59,9 @@ const client = createClient({ token })
 Tools that implement `require()` themselves, such as older bundlers and test
 runners, may not load an ES module this way.
 
+TypeScript callers that compile to CommonJS need `"module": "nodenext"`.
+Under `"node16"` the compiler refuses to `require` an ES module.
+
 ### `apiKey` is gone; use `token`
 
 Asana retired API keys in favour of personal access tokens. A token goes in
@@ -78,6 +81,8 @@ const client = asana.createClient({ token: 'your-personal-access-token' })
 
 A missed migration is loud: `createClient` throws a `TypeError` that names
 `token`.
+
+An `apiKey` passed alongside a `token` is ignored, as it was in 1.x.
 
 ### Identifiers are `gid` strings, not `id` numbers
 
@@ -122,6 +127,9 @@ const me = await client.users.me()
 When you pass a callback, the returned promise waits for the callback and
 does not reject, so there is nothing extra to handle.
 
+An error thrown inside your callback is still an uncaught exception, as it
+was in 1.x.
+
 A missed migration is quiet only for code that used the return value. Search
 for `.pipe(` and `.on(` on calls to the client.
 
@@ -131,6 +139,9 @@ In 1.x a `200` response whose body could not be parsed called back with no
 error and no result, which looked like an empty success. It now rejects with
 an `AsanaError` whose `cause` is the parse error and whose `result` is the
 text of the body.
+
+An error response that is not JSON works the same way: `result` is the text.
+In 1.x it was the parse error.
 
 ### Only the documented entry point can be imported
 
@@ -192,7 +203,8 @@ These worked differently in 1.x. No change to your code is needed.
 - `tasks.create()` adds the task to its project using the `gid` Asana
   returns, and accepts an array of projects.
 - `workspaces.teams()` calls `/workspaces/:workspace/teams`.
-- `users.tasks()` settles once when a workspace returns an error.
+- `users.tasks()` settles once when a workspace returns an error. A failure
+  to connect now rejects. In 1.x it counted as a workspace with no tasks.
 - `tasks.create()` and `tags.create()` no longer add `workspace` to the
   object you pass in.
 
@@ -205,7 +217,14 @@ These worked differently in 1.x. No change to your code is needed.
   the error from `fetch`.
 - `createClient()` copies the `oauth` object it is given. After a refresh,
   read the new token from `client.oauth`, not from your own object.
-- `client.successCodes` and the `client.proxy` property are gone.
+- An array in a query is sent as one comma-separated value, which is how
+  Asana reads lists. 1.x repeated the parameter. A parameter that is null or
+  undefined is left out. 1.x sent it empty.
+- `users.list()` requests `/users`. 1.x requested `/users/`.
+- When `tasks.create()` cannot add the new task to a project, the error
+  carries the task as `err.task`.
+- These properties of the client are gone: `successCodes`, `proxy`, `apiKey`,
+  `authType`, `authToken` and `refreshAttempted`.
 
 ## New
 

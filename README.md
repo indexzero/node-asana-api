@@ -89,7 +89,7 @@ try {
   if (err instanceof AsanaError) {
     console.log(err.status) // 404
     console.log(err.message) // Asana Error (404): Not Found
-    console.log(err.result.errors[0].message) // what Asana said
+    console.log(err.result?.errors?.[0]?.message) // what Asana said
   }
 }
 ```

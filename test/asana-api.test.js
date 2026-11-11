@@ -162,7 +162,7 @@ describe('query parameters', () => {
       calls.map(call => call.url.pathname + call.url.search),
       [
         '/api/1.0/projects?workspace=7&opt_fields=name%2Cowner',
-        '/api/1.0/users/?workspace=7',
+        '/api/1.0/users?workspace=7',
         '/api/1.0/users/42?opt_fields=email',
         '/api/1.0/tasks/5?opt_fields=name',
         '/api/1.0/workspaces/7/projects?archived=false'

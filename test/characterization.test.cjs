@@ -131,7 +131,8 @@ describe('authorization', () => {
 
 describe('requests', () => {
   const cases = [
-    ['users.list', c => [c.users, 'list'], 'GET', '/users/'],
+    // 1.x sent a trailing slash, which the API does not document.
+    ['users.list', c => [c.users, 'list'], 'GET', LEGACY ? '/users/' : '/users'],
     ['users.me', c => [c.users, 'me'], 'GET', '/users/me'],
     ['users.get', c => [c.users, 'get', '42'], 'GET', '/users/42'],
     ['workspaces.list', c => [c.workspaces, 'list'], 'GET', '/workspaces'],
